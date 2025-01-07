@@ -1,0 +1,11 @@
+---
+title: Hello World
+layout: article
+datetime: 2025-01-01
+---
+
+You know that feeling when you walk into a new coffee shop and feel a bit awkward, not quite sure where to sit? That's pretty much how I feel right now, inaugurating this space. There's that desire to choose the perfect table, to have an elaborate order ready on the tip of your tongue, to look like you've always belonged there.
+
+But the truth is, I'm just getting started. No grand pretensions or a set menu here. Sometimes it'll be a strong espresso about technology, other times a light cappuccino talking about life. What matters is that this little space now exists, and you're more than welcome to sit down and share these cups with me.
+
+I promise I won't mind if you prefer tea.
