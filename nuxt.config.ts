@@ -5,30 +5,26 @@ export default defineNuxtConfig({
   },
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
-  modules: ['@nuxt/content', '@nuxtjs/tailwindcss', '@nuxt/fonts', '@nuxt/scripts', '@nuxtjs/i18n'],
+  modules: ['@nuxt/content', '@nuxtjs/tailwindcss', '@nuxt/fonts', '@nuxt/scripts', 'nuxt-i18n-micro'],
   i18n: {
     locales: [
       {
         code: 'en',
-        iso: 'en-US',
-        name: 'English',
-        file: 'en.json'
+        language: 'en-US',
+        name: 'English'
       },
       {
         code: 'pt',
-        iso: 'pt-BR',
-        name: 'Português',
-        file: 'pt.json'
+        language: 'pt-BR',
+        name: 'Português'
       }
     ],
-    lazy: true,
+    meta: true,
+    metaBaseUrl: process.env.NUXT_PUBLIC_SITE_URL,
+    translationDir: 'i18n/locales',
     defaultLocale: 'en',
-    strategy: 'prefix_except_default',
-    detectBrowserLanguage: {
-      useCookie: true,
-      cookieKey: 'i18n_redirected',
-      redirectOn: 'root'
-    }
+    autoDetectLanguage: true,
+    strategy: 'prefix_except_default'
   },
   content: {
     documentDriven: true

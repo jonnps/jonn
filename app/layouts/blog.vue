@@ -1,7 +1,7 @@
 <script setup>
-const { t } = useI18n()
-const { locale } = useI18n()
-const posts = await queryContent(`${locale.value === 'pt' ? 'pt/' : ''}blog`)
+const { t, $getLocale } = useI18n()
+const locale = $getLocale()
+const posts = await queryContent(`${locale === 'pt' ? 'pt/' : ''}blog`)
   .where({ layout: 'article' })
   .sort({ datetime: -1 })
   .find()
@@ -18,12 +18,19 @@ const posts = await queryContent(`${locale.value === 'pt' ? 'pt/' : ''}blog`)
           <div class="flex items-center gap-x-4 text-xs">
             <time :datetime="post.datetime" class="text-gray-400">
               {{
-                new Date(post.datetime).toLocaleDateString('en-US', {
-                  timeZone: 'UTC',
-                  year: 'numeric',
-                  month: '2-digit',
-                  day: '2-digit'
-                })
+                locale === 'en'
+                  ? new Date(post.datetime).toLocaleDateString('en-US', {
+                      timeZone: 'UTC',
+                      year: 'numeric',
+                      month: '2-digit',
+                      day: '2-digit'
+                    })
+                  : new Date(post.datetime).toLocaleDateString('pt-BR', {
+                      timeZone: 'UTC',
+                      year: 'numeric',
+                      month: '2-digit',
+                      day: '2-digit'
+                    })
               }}
             </time>
           </div>

@@ -3,12 +3,19 @@
     <div class="flex items-center gap-x-4 text-xs mb-2">
       <time :datetime="datetime" class="text-gray-400">
         {{
-          new Date(datetime).toLocaleDateString('en-US', {
-            timeZone: 'UTC',
-            year: 'numeric',
-            month: '2-digit',
-            day: '2-digit'
-          })
+          locale === 'en'
+            ? new Date(datetime).toLocaleDateString('en-US', {
+                timeZone: 'UTC',
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit'
+              })
+            : new Date(datetime).toLocaleDateString('pt-BR', {
+                timeZone: 'UTC',
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit'
+              })
         }}
       </time>
     </div>
@@ -21,7 +28,25 @@
 </template>
 
 <script setup lang="ts">
+const { $getLocale } = useI18n()
 const { page } = useContent()
+const locale = $getLocale()
 const title = computed(() => page.value?.title)
 const datetime = computed(() => page.value?.datetime)
+
+const alternate = computed(() => {
+  const alternate = []
+  for (const [key, value] of Object.entries(page.value?.alternate)) {
+    alternate.push({
+      id: `i18n-alternate-${key}`,
+      rel: 'alternate',
+      hreflang: key,
+      href: value as string
+    })
+  }
+
+  return alternate
+})
+
+useHead({ link: alternate.value })
 </script>
