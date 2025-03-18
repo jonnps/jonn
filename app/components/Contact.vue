@@ -1,6 +1,8 @@
 <script setup>
 import { Icon } from '@iconify/vue'
 
+const { t } = useI18n()
+
 const socialLinks = [
   {
     name: 'GitHub',
@@ -27,7 +29,7 @@ const socialLinks = [
 
 <template>
   <div class="flex flex-col gap-6">
-    <h2 class="text-2xl">You can find me at</h2>
+    <h2 class="text-2xl">{{ t('home.contact') }}</h2>
     <div class="flex flex-wrap justify-center md:justify-start gap-4">
       <a
         v-for="social in socialLinks"

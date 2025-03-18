@@ -1,0 +1,34 @@
+{
+  "nav": {
+    "home": "Home",
+    "blog": "Blog",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "common": {
+    "readMore": "Read More",
+    "publishedOn": "Published on",
+    "language": "Language",
+    "backToHome": "Back to Home"
+  },
+  "blog": {
+    "title": "Random Thoughts",
+    "latestPosts": "Latest Posts",
+    "categories": "Categories",
+    "tags": "Tags",
+    "noPosts": "No posts found"
+  },
+  "home": {
+    "subtitle": "WordPress Full Stack Developer",
+    "bio": {
+      "1": "I blend web performance and creative development to craft digital experiences that stand out. My passion lies in building efficient, scalable solutions where code quality meets an elegant design",
+      "2": "As a Full Stack Developer, I thrive on transforming complex challenges into clean, performant applications. My approach combines technical expertise with a keen eye for optimization and user experience",
+      "3": "When not immersed in programming, I'm trying to learn music or understand how things work. After all, technology is just a tool to enhance our real-world experiences and bring our ideas to life. It's the impact on people's lives that truly matters."
+    },
+    "techStack": {
+      "title": "Stack",
+      "description": "Some of the software and technologies I use on a daily basis"
+    },
+    "contact": "You can find me at"
+  }
+}

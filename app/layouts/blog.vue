@@ -1,6 +1,15 @@
+<script setup>
+const { t } = useI18n()
+const { locale } = useI18n()
+const posts = await queryContent(`${locale.value === 'pt' ? 'pt/' : ''}blog`)
+  .where({ layout: 'article' })
+  .sort({ datetime: -1 })
+  .find()
+</script>
+
 <template>
   <div>
-    <h2 class="text-pretty text-4xl tracking-tight">Random Thoughts</h2>
+    <h2 class="text-pretty text-4xl tracking-tight leading-tight">{{ t('blog.title') }}</h2>
     <div class="mt-5 space-y-8 border-t border-white/10 pt-10">
       <NuxtLink v-for="post in posts" :key="post.id" :to="post._path" class="group inline-block">
         <article
@@ -31,7 +40,3 @@
     <ContentDoc />
   </div>
 </template>
-
-<script setup>
-const posts = await queryContent('blog').where({ layout: 'article' }).sort({ datetime: -1 }).find()
-</script>

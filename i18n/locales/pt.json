@@ -1,0 +1,34 @@
+{
+  "nav": {
+    "home": "Início",
+    "blog": "Blog",
+    "about": "Sobre",
+    "contact": "Contato"
+  },
+  "common": {
+    "readMore": "Ler Mais",
+    "publishedOn": "Publicado em",
+    "language": "Idioma",
+    "backToHome": "Voltar ao Início"
+  },
+  "blog": {
+    "title": "Pensamentos Aleatórios",
+    "latestPosts": "Últimos Posts",
+    "categories": "Categorias",
+    "tags": "Tags",
+    "noPosts": "Nenhum post encontrado"
+  },
+  "home": {
+    "subtitle": "Desenvolvedor Full Stack WordPress",
+    "bio": {
+      "1": "Eu combino performance web e desenvolvimento criativo para criar experiências digitais que se destacam. Minha paixão está em construir soluções eficientes e escaláveis onde a qualidade do código encontra um design elegante.",
+      "2": "Como Desenvolvedor Full Stack, prospero ao transformar desafios complexos em aplicações limpas e performáticas. Minha abordagem combina expertise técnica com um olhar apurado para otimização e experiência do usuário.",
+      "3": "Quando não estou imerso na programação, estou tentando aprender música ou entender como as coisas funcionam. Afinal, a tecnologia é apenas uma ferramenta para aprimorar nossas experiências no mundo real e dar vida às nossas ideias. É o impacto na vida das pessoas que realmente importa."
+    },
+    "techStack": {
+      "title": "Stack",
+      "description": "Algumas das tecnologias e softwares que utilizo no meu dia a dia"
+    },
+    "contact": "Você pode me encontrar em"
+  }
+}

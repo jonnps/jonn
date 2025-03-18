@@ -1,25 +1,32 @@
 <script lang="ts" setup>
+const { t, locale, setLocale, locales } = useI18n()
+const isOpen = ref(false)
+
 type Navigation = {
   name: string
   to: string
 }
 
-const navigation: Record<string, Navigation> = {
-  home: {
-    name: 'Home',
-    to: '/'
-  },
-  blog: {
-    name: 'Blog',
-    to: '/blog'
-  }
-}
+type LanguageCode = 'en' | 'pt'
+
+const navigation = computed(() => {
+  return {
+    home: {
+      name: t('nav.home'),
+      to: locale.value === 'en' ? '/' : '/pt'
+    },
+    blog: {
+      name: t('nav.blog'),
+      to: locale.value === 'en' ? '/blog' : '/pt/blog'
+    }
+  } as Record<string, Navigation>
+})
 </script>
 
 <template>
   <div class="mx-auto my-2 flex w-full items-center justify-center">
     <header class="rounded-full">
-      <div class="group relative inline-flex items-center overflow-hidden transition rounded-full">
+      <div class="group relative inline-flex items-center transition rounded-full">
         <div
           class="absolute inset-0.5 rounded-full border border-white/10 bg-zinc-900 sm:bg-zinc-900/80 sm:backdrop-blur-md"
         />
@@ -40,6 +47,49 @@ const navigation: Record<string, Navigation> = {
           >
             {{ item.name }}
           </NuxtLink>
+
+          <div class="relative">
+            <button
+              @click="isOpen = !isOpen"
+              class="flex items-center gap-1 rounded-full border px-4 py-1 transition-all duration-300 ease-in-out sm:px-6 text-white/60 border-transparent text-muted hover:text-main"
+            >
+              <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" class="iconLanguage_nlXk">
+                <path
+                  fill="currentColor"
+                  d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"
+                ></path>
+              </svg>
+              {{ locale.toUpperCase() }}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="size-4"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+              </svg>
+            </button>
+
+            <div
+              v-if="isOpen"
+              class="absolute right-0 mt-2 w-28 rounded-lg bg-zinc-800 overflow-hidden shadow-lg ring-1 ring-white/10 transition-opacity duration-200 ease-in-out"
+              :class="{ 'opacity-100': isOpen, 'opacity-0': !isOpen }"
+            >
+              <div>
+                <button
+                  v-for="language in locales"
+                  :key="language.code"
+                  @click="setLocale(language.code)"
+                  class="flex w-full items-center px-4 py-2 text-sm text-white/60 hover:bg-zinc-700 transition-colors duration-200"
+                  :class="{ 'bg-zinc-700': language.code === locale }"
+                >
+                  {{ language.name }}
+                </button>
+              </div>
+            </div>
+          </div>
         </nav>
       </div>
     </header>
