@@ -1,8 +1,8 @@
 <template>
   <div>
     <h2 class="text-pretty text-4xl tracking-tight">Random Thoughts</h2>
-    <div class="mt-5 space-y-16 border-t border-white/10 pt-10">
-      <NuxtLink v-for="post in posts" :key="post.id" :to="post._path" class="group">
+    <div class="mt-5 space-y-8 border-t border-white/10 pt-10">
+      <NuxtLink v-for="post in posts" :key="post.id" :to="post._path" class="group inline-block">
         <article
           class="transform-gpu rounded-xl border border-white/10 bg-white/5 transition duration-500 will-change-transform hover:bg-white/[0.075] p-5"
         >
@@ -33,5 +33,5 @@
 </template>
 
 <script setup>
-const posts = await queryContent('blog').where({ layout: 'article' }).find()
+const posts = await queryContent('blog').where({ layout: 'article' }).sort({ datetime: -1 }).find()
 </script>
