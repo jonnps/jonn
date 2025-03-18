@@ -1,6 +1,8 @@
 <script setup>
 import { Icon } from '@iconify/vue'
 
+const { t } = useI18n()
+
 const techStack = [
   { name: 'WordPress', icon: 'mdi:wordpress' },
   { name: 'WooCommerce', icon: 'devicon:woocommerce' },
@@ -22,8 +24,8 @@ const techStack = [
 
 <template>
   <div class="flex flex-col gap-6">
-    <h2 class="text-2xl">Stack</h2>
-    <p class="text-gray-400">Some of the software and technologies I use on a daily basis</p>
+    <h2 class="text-2xl">{{ t('home.techStack.title') }}</h2>
+    <p class="text-gray-400">{{ t('home.techStack.description') }}</p>
     <div class="flex flex-wrap justify-center md:justify-start gap-4">
       <div
         v-for="tech in techStack"
