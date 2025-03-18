@@ -17,7 +17,7 @@
     </h1>
   </div>
 
-  <ContentDoc class="space-y-4" />
+  <ContentDoc class="space-y-4 mb-10" />
 </template>
 
 <script setup lang="ts">
