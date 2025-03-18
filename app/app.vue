@@ -4,6 +4,10 @@
   </div>
 </template>
 
+<script setup>
+const head = useLocaleHead()
+</script>
+
 <style>
 body {
   background-color: #19191d;
