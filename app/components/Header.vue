@@ -1,6 +1,11 @@
 <script lang="ts" setup>
-const { t, locale, setLocale, locales } = useI18n()
+const { t, $switchLocale, $getLocales, $getLocale } = useI18n()
+const { page } = useContent()
+const router = useRouter()
+
 const isOpen = ref(false)
+const locales = $getLocales()
+const locale = $getLocale()
 
 type Navigation = {
   name: string
@@ -13,14 +18,24 @@ const navigation = computed(() => {
   return {
     home: {
       name: t('nav.home'),
-      to: locale.value === 'en' ? '/' : '/pt'
+      to: locale === 'en' ? '/' : '/pt'
     },
     blog: {
       name: t('nav.blog'),
-      to: locale.value === 'en' ? '/blog' : '/pt/blog'
+      to: locale === 'en' ? '/blog' : '/pt/blog'
     }
   } as Record<string, Navigation>
 })
+
+const handleLanguageSwitch = async (targetLocale: string) => {
+  const currentPage = page.value
+  if (currentPage?.alternate?.[targetLocale]) {
+    await router.push(currentPage.alternate[targetLocale])
+  } else {
+    await $switchLocale(targetLocale)
+  }
+  isOpen.value = false
+}
 </script>
 
 <template>
@@ -81,7 +96,7 @@ const navigation = computed(() => {
                 <button
                   v-for="language in locales"
                   :key="language.code"
-                  @click="setLocale(language.code)"
+                  @click="() => handleLanguageSwitch(language.code)"
                   class="flex w-full items-center px-4 py-2 text-sm text-white/60 hover:bg-zinc-700 transition-colors duration-200"
                   :class="{ 'bg-zinc-700': language.code === locale }"
                 >
