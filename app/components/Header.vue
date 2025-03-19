@@ -1,18 +1,19 @@
 <script lang="ts" setup>
+import { onClickOutside } from '@vueuse/core'
+
 const { t, $switchLocale, $getLocales, $getLocale } = useI18n()
 const { page } = useContent()
-const router = useRouter()
+const route = useRoute()
 
 const isOpen = ref(false)
 const locales = $getLocales()
 const locale = $getLocale()
+const dropdownRef = ref(null)
 
 type Navigation = {
   name: string
   to: string
 }
-
-type LanguageCode = 'en' | 'pt'
 
 const navigation = computed(() => {
   return {
@@ -28,25 +29,35 @@ const navigation = computed(() => {
 })
 
 const handleLanguageSwitch = async (targetLocale: string) => {
+  isOpen.value = false
+
   const currentPage = page.value
   if (currentPage?.alternate?.[targetLocale]) {
-    await router.push(currentPage.alternate[targetLocale])
+    await navigateTo(currentPage.alternate[targetLocale])
   } else {
-    await $switchLocale(targetLocale)
+    $switchLocale(targetLocale)
   }
-  isOpen.value = false
 }
+
+const isActiveRoute = (path: string) => {
+  return path === route.path
+}
+
+// Close dropdown when clicking outside
+onClickOutside(dropdownRef, () => {
+  isOpen.value = false
+})
 </script>
 
 <template>
   <div class="mx-auto my-2 flex w-full items-center justify-center">
     <header class="rounded-full">
-      <div class="group relative inline-flex items-center transition rounded-full">
+      <div class="group relative inline-flex items-center rounded-full">
         <div
           class="absolute inset-0.5 rounded-full border border-white/10 bg-zinc-900 sm:bg-zinc-900/80 sm:backdrop-blur-md"
         />
 
-        <nav class="z-10 flex justify-around gap-2 p-2 transition-all duration-300 ease-in-out sm:hover:gap-4">
+        <nav class="z-10 flex justify-around gap-2 p-2 transition-all duration-300 ease-in-out">
           <NuxtLink
             v-for="item in navigation"
             :id="item.name.toLowerCase()"
@@ -55,7 +66,7 @@ const handleLanguageSwitch = async (targetLocale: string) => {
             :to="item.to"
             class="flex items-center rounded-full border px-4 py-1 transition-all duration-300 ease-in-out sm:px-6 text-white/60"
             :class="[
-              item.to === $route.path
+              isActiveRoute(item.to)
                 ? 'border-white/5 bg-[#303235] text-white/75 shadow-2xl shadow-white/50 text-shadow-sm'
                 : 'border-transparent text-muted hover:border-white/5 hover:text-main'
             ]"
@@ -63,10 +74,12 @@ const handleLanguageSwitch = async (targetLocale: string) => {
             {{ item.name }}
           </NuxtLink>
 
-          <div class="relative">
+          <div class="relative" ref="dropdownRef">
             <button
               @click="isOpen = !isOpen"
               class="flex items-center gap-1 rounded-full border px-4 py-1 transition-all duration-300 ease-in-out sm:px-6 text-white/60 border-transparent text-muted hover:text-main"
+              aria-haspopup="true"
+              :aria-expanded="isOpen"
             >
               <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" class="iconLanguage_nlXk">
                 <path
@@ -88,9 +101,9 @@ const handleLanguageSwitch = async (targetLocale: string) => {
             </button>
 
             <div
-              v-if="isOpen"
+              v-show="isOpen"
               class="absolute right-0 mt-2 w-28 rounded-lg bg-zinc-800 overflow-hidden shadow-lg ring-1 ring-white/10 transition-opacity duration-200 ease-in-out"
-              :class="{ 'opacity-100': isOpen, 'opacity-0': !isOpen }"
+              :class="isOpen ? 'opacity-100' : 'opacity-0'"
             >
               <div>
                 <button
