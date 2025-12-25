@@ -33,10 +33,11 @@ const { page } = useContent()
 const locale = $getLocale()
 const title = computed(() => page.value?.title)
 const datetime = computed(() => page.value?.datetime)
+const description = computed(() => page.value?.description)
 
 const alternate = computed(() => {
   const alternate = []
-  for (const [key, value] of Object.entries(page.value?.alternate)) {
+  for (const [key, value] of Object.entries(page.value?.alternate || {})) {
     alternate.push({
       id: `i18n-alternate-${key}`,
       rel: 'alternate',
@@ -49,4 +50,16 @@ const alternate = computed(() => {
 })
 
 useHead({ link: alternate.value })
+
+useSeoMeta({
+  title: () => `${title.value} | Jonnatha Santos`,
+  description: () => description.value,
+  ogTitle: () => `${title.value} | Jonnatha Santos`,
+  ogDescription: () => description.value,
+  ogImage: 'https://jonn.dev/jonn.png',
+  ogType: 'article',
+  twitterCard: 'summary_large_image',
+  twitterTitle: () => `${title.value} | Jonnatha Santos`,
+  twitterDescription: () => description.value
+})
 </script>

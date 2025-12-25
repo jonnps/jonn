@@ -13,6 +13,16 @@ const showArtModal = ref(false)
 const toggleArtModal = () => {
   showArtModal.value = !showArtModal.value
 }
+
+useSeoMeta({
+  title: () => `${t('blog.title')} | Jonnatha Santos`,
+  description: () => t('home.bio.1'),
+  ogTitle: () => `${t('blog.title')} | Jonnatha Santos`,
+  ogDescription: () => t('home.bio.1'),
+  ogImage: 'https://jonn.dev/jonn.png',
+  ogType: 'website',
+  twitterCard: 'summary_large_image'
+})
 </script>
 
 <template>

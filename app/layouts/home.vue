@@ -1,5 +1,18 @@
 <script setup lang="ts">
 const { t } = useI18n()
+
+useSeoMeta({
+  title: 'Jonnatha Santos | Web Developer',
+  description: () => t('home.bio.1'),
+  ogTitle: 'Jonnatha Santos | Web Developer',
+  ogDescription: () => t('home.bio.1'),
+  ogImage: 'https://jonn.dev/jonn.png',
+  ogType: 'website',
+  twitterCard: 'summary_large_image',
+  twitterTitle: 'Jonnatha Santos | Web Developer',
+  twitterDescription: () => t('home.bio.1'),
+  twitterImage: 'https://jonn.dev/jonn.png'
+})
 </script>
 
 <template>
