@@ -34,6 +34,16 @@ export default defineNuxtConfig({
     minify: true,
     compressPublicAssets: true
   },
+  vite: {
+    build: {
+      cssCodeSplit: false,
+      rollupOptions: {
+        output: {
+          manualChunks: () => 'app'
+        }
+      }
+    }
+  },
   scripts: {
     registry: {
       googleAnalytics: true
