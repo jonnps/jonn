@@ -5,7 +5,13 @@ export default defineNuxtConfig({
   },
   compatibilityDate: '2024-11-01',
   devtools: { enabled: process.env.NODE_ENV === 'development' },
-  modules: ['@nuxt/content', '@nuxtjs/tailwindcss', '@nuxt/fonts', '@nuxt/scripts', 'nuxt-i18n-micro', '@nuxt/image'],
+  modules: ['@nuxt/content', '@nuxtjs/tailwindcss', '@nuxt/fonts', '@nuxt/scripts', 'nuxt-i18n-micro', '@nuxt/image', '@nuxtjs/sitemap'],
+  site: {
+    url: process.env.NUXT_PUBLIC_SITE_URL || 'https://jonn.dev'
+  },
+  sitemap: {
+    sources: ['/api/__sitemap__/urls']
+  },
   i18n: {
     locales: [
       {
