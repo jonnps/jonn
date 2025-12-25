@@ -4,6 +4,7 @@
 
 <script setup>
 const head = useLocaleHead()
+useHead(head)
 </script>
 
 <style>
