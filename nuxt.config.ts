@@ -24,7 +24,8 @@ export default defineNuxtConfig({
     translationDir: 'i18n/locales',
     defaultLocale: 'en',
     autoDetectLanguage: true,
-    strategy: 'prefix_except_default'
+    strategy: 'prefix_except_default',
+    disablePageLocales: true
   },
   content: {
     documentDriven: true
