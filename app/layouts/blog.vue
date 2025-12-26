@@ -29,10 +29,13 @@ useSeoMeta({
   <div>
     <div class="relative">
       <div class="relative">
-        <img
+        <NuxtImg
           src="/jonn-eye.jpeg"
           alt="Jonn"
+          width="800"
+          height="144"
           class="w-full h-auto lg:h-36 object-cover lg:object-[center_-75px] rounded-t-xl"
+          loading="eager"
         />
         <button
           @click="toggleArtModal"
@@ -59,7 +62,7 @@ useSeoMeta({
           <Icon icon="mdi:close" width="18" height="18" />
         </button>
 
-        <img src="/jonn-art.jpeg" alt="Jonn Art" class="w-full h-auto rounded-lg" />
+        <NuxtImg src="/jonn-art.jpeg" alt="Jonn Art" width="512" class="w-full h-auto rounded-lg" loading="lazy" />
       </div>
     </div>
 

@@ -4,14 +4,15 @@
 
 <script setup>
 const route = useRoute()
-const baseUrl = 'https://jonn.dev'
+const config = useRuntimeConfig()
+const siteUrl = config.public.siteUrl || 'https://jonn.dev'
 
 const head = useLocaleHead()
 useHead({
   ...head,
   link: [
     ...(head.link || []),
-    { rel: 'canonical', href: `${baseUrl}${route.path}` }
+    { rel: 'canonical', href: `${siteUrl}${route.path}` }
   ]
 })
 </script>

@@ -54,16 +54,23 @@ onMounted(() => {
       </div>
 
       <div class="relative z-10">
-        <img
+        <NuxtImg
           src="/jonn.png"
           alt="Profile"
+          sizes="192px md:288px"
+          quality="70"
           class="rounded-full w-full h-full object-cover transition-opacity duration-500"
           :class="{ 'opacity-0': showSecondImage }"
+          loading="eager"
+          fetchpriority="high"
         />
-        <img
+        <NuxtImg
           src="/jonn-wizard.png"
           alt="Profile"
+          sizes="192px md:288px"
+          quality="70"
           class="rounded-full w-full h-full object-cover transition-opacity duration-500 absolute inset-0"
+          loading="eager"
           :class="{ 'opacity-100': showSecondImage, 'opacity-0': !showSecondImage }"
         />
       </div>

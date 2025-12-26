@@ -5,7 +5,7 @@ export default defineNuxtConfig({
   },
   compatibilityDate: '2024-11-01',
   devtools: { enabled: process.env.NODE_ENV === 'development' },
-  modules: ['@nuxt/content', '@nuxtjs/tailwindcss', '@nuxt/fonts', '@nuxt/scripts', 'nuxt-i18n-micro', '@nuxt/image', '@nuxtjs/sitemap'],
+  modules: ['@nuxt/content', '@nuxtjs/tailwindcss', '@nuxt/fonts', 'nuxt-i18n-micro', '@nuxt/image', '@nuxtjs/sitemap', '@nuxtjs/critters'],
   site: {
     url: process.env.NUXT_PUBLIC_SITE_URL || 'https://jonn.dev'
   },
@@ -51,11 +51,6 @@ export default defineNuxtConfig({
       }
     }
   },
-  scripts: {
-    registry: {
-      googleAnalytics: true
-    }
-  },
   experimental: {
     payloadExtraction: true
   },
@@ -66,31 +61,32 @@ export default defineNuxtConfig({
         { name: 'format-detection', content: 'telephone=no' }
       ],
       link: [
-        { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
-        { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' }
-      ]
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+        { rel: 'preconnect', href: 'https://api.iconify.design' }
+      ],
+      script: process.env.NUXT_PUBLIC_UMAMI_ID ? [
+        { src: 'https://cloud.umami.is/script.js', defer: true, 'data-website-id': process.env.NUXT_PUBLIC_UMAMI_ID }
+      ] : []
     }
+  },
+  fonts: {
+    provider: 'google',
+    families: [
+      { name: 'Inter', weights: [400, 600, 700], subsets: ['latin'], preload: true }
+    ],
+    defaults: {
+      weights: [400, 600, 700],
+      subsets: ['latin']
+    }
+  },
+  image: {
+    provider: 'netlify',
+    quality: 80,
+    format: ['webp', 'avif']
   },
   runtimeConfig: {
     public: {
-      siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://jonn.dev',
-      scripts: {
-        googleAnalytics: {
-          id: ''
-        }
-      },
-      nuxtImage: {
-        quality: 80,
-        format: ['webp'],
-        screens: {
-          xs: 320,
-          sm: 640,
-          md: 768,
-          lg: 1024,
-          xl: 1280,
-          xxl: 1536
-        }
-      }
+      siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://jonn.dev'
     }
   }
 })
