@@ -26,7 +26,7 @@ export default defineNuxtConfig({
       }
     ],
     meta: true,
-    metaBaseUrl: process.env.NUXT_PUBLIC_SITE_URL,
+    metaBaseUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://jonn.dev',
     translationDir: 'i18n/locales',
     defaultLocale: 'en',
     autoDetectLanguage: true,
@@ -34,10 +34,10 @@ export default defineNuxtConfig({
     disablePageLocales: true
   },
   content: {
-    documentDriven: true
+    documentDriven: false
   },
   nitro: {
-    preset: 'netlify',
+    preset: 'netlify-static',
     minify: true,
     compressPublicAssets: true
   },
@@ -73,6 +73,7 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
+      siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://jonn.dev',
       scripts: {
         googleAnalytics: {
           id: ''

@@ -31,6 +31,9 @@
 </template>
 
 <script setup lang="ts">
-const { page } = useContent()
+const route = useRoute()
+const { data: page } = await useAsyncData(`page-${route.path}`, () =>
+  queryContent(route.path).only(['layout']).findOne()
+)
 const layout = computed(() => page.value?.layout)
 </script>

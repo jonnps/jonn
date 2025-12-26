@@ -2,13 +2,16 @@
 import { onClickOutside } from '@vueuse/core'
 
 const { t, $switchLocale, $getLocales, $getLocale } = useI18n()
-const { page } = useContent()
 const route = useRoute()
 
 const isOpen = ref(false)
 const locales = $getLocales()
 const locale = $getLocale()
 const dropdownRef = ref(null)
+
+const { data: page } = await useAsyncData(`header-alt-${route.path}`, () =>
+  queryContent(route.path).only(['alternate']).findOne()
+)
 
 type Navigation = {
   name: string
@@ -30,10 +33,8 @@ const navigation = computed(() => {
 
 const handleLanguageSwitch = async (targetLocale: string) => {
   isOpen.value = false
-
-  const currentPage = page.value
-  if (currentPage?.alternate?.[targetLocale]) {
-    await navigateTo(currentPage.alternate[targetLocale])
+  if (page.value?.alternate?.[targetLocale]) {
+    await navigateTo(page.value.alternate[targetLocale])
   } else {
     $switchLocale(targetLocale)
   }

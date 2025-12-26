@@ -3,8 +3,17 @@
 </template>
 
 <script setup>
+const route = useRoute()
+const baseUrl = 'https://jonn.dev'
+
 const head = useLocaleHead()
-useHead(head)
+useHead({
+  ...head,
+  link: [
+    ...(head.link || []),
+    { rel: 'canonical', href: `${baseUrl}${route.path}` }
+  ]
+})
 </script>
 
 <style>
